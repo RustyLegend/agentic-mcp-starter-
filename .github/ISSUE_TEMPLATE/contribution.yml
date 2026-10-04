@@ -1,0 +1,45 @@
+name: Workshop Contribution
+description: Pick up an existing workshop issue and document your implementation plan.
+title: "[Contrib] <issue id> — <short description>"
+labels: ["good-first-issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Welcome! Use this template **after** you have been assigned an issue.
+
+  - type: input
+    id: issue-id
+    attributes:
+      label: Issue ID
+      placeholder: "e.g. B01, B02, I01"
+    validations:
+      required: true
+
+  - type: textarea
+    id: plan
+    attributes:
+      label: What do you plan to implement?
+      description: Briefly describe your approach.
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: How will you test it?
+      description: List test cases you plan to write.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-submission checklist
+      options:
+        - label: I have read CONTRIBUTING.md
+          required: true
+        - label: I will run `pytest -q` before opening a PR
+          required: true
+        - label: I will run `ruff check .` before opening a PR
+          required: true

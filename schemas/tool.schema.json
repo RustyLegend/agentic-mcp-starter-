@@ -1,0 +1,72 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/schemas/mcp-tool.schema.json",
+    "title": "MCP Tool Definition",
+    "description": "Describes the structure of a single MCP tool as registered on an MCP server.",
+    "type": "object",
+    "required": [
+        "name",
+        "description",
+        "inputSchema"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Unique machine-readable name for the tool (e.g. 'calculate').",
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "description": {
+            "type": "string",
+            "description": "Human-readable description of what the tool does.",
+            "minLength": 1
+        },
+        "inputSchema": {
+            "type": "object",
+            "description": "JSON Schema describing the tool's input parameters.",
+            "required": [
+                "type",
+                "properties"
+            ],
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "object"
+                },
+                "properties": {
+                    "type": "object",
+                    "description": "Each key is a parameter name; its value is a JSON Schema for that parameter.",
+                    "minProperties": 1
+                },
+                "required": {
+                    "type": "array",
+                    "description": "List of parameter names that are required.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "examples": [
+        {
+            "name": "calculate",
+            "description": "Evaluate a simple arithmetic expression.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "expression": {
+                        "type": "string",
+                        "description": "The arithmetic expression to evaluate, e.g. '2 + 3'."
+                    }
+                },
+                "required": [
+                    "expression"
+                ]
+            }
+        }
+    ]
+}

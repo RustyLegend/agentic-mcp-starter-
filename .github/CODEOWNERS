@@ -1,0 +1,15 @@
+# CODEOWNERS
+#
+# Maintainers are automatically requested for review when a file they own
+# is changed in a pull request.
+#
+# Format: <path-pattern>  <@github-username or @org/team>
+#
+# Replace @workshop-maintainers with the actual GitHub team or username.
+
+# Default owner for everything in the repo
+*                               @workshop-maintainers
+
+# CI and ownership files — only maintainers should modify these
+.github/workflows/              @workshop-maintainers
+.github/CODEOWNERS              @workshop-maintainers
