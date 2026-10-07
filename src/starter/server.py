@@ -35,7 +35,7 @@ mcp = FastMCP(
     name="agentic-mcp-starter",
     instructions=(
         "This is a workshop MCP server. "
-        "It provides a calculator tool and two educational resources."
+        "It provides a calculator tool and educational workshop resources."
     ),
 )
 

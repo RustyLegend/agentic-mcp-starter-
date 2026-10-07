@@ -62,3 +62,54 @@ class TestReadResource:
         for uri in RESOURCES:
             content = read_resource(uri)
             assert isinstance(content, str)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Issue B03 — workshop://getting-started
+# ──────────────────────────────────────────────────────────────────────────────
+GETTING_STARTED_URI = "workshop://getting-started"
+
+
+class TestGettingStartedResource:
+    def test_uri_is_returned_by_list_resources(self):
+        uris = [r["uri"] for r in list_resources()]
+        assert GETTING_STARTED_URI in uris
+
+    def test_read_returns_non_empty_string(self):
+        content = read_resource(GETTING_STARTED_URI)
+        assert isinstance(content, str)
+        assert content.strip() != ""
+
+    def test_listed_metadata_is_complete(self):
+        (entry,) = [r for r in list_resources() if r["uri"] == GETTING_STARTED_URI]
+        assert entry["name"].strip() != ""
+        assert entry["description"].strip() != ""
+        assert entry["mimeType"] == "text/plain"
+
+    def test_guide_covers_setup_and_learning_flow(self):
+        content = read_resource(GETTING_STARTED_URI)
+        # Setup: environment creation and installation.
+        assert "venv" in content
+        assert "pip install" in content
+        # Verification commands that CONTRIBUTING.md asks for.
+        assert "pytest" in content
+        assert "ruff" in content
+
+    def test_existing_resources_are_unaffected(self):
+        uris = [r["uri"] for r in list_resources()]
+        assert "workshop://introduction" in uris
+        assert "workshop://architecture" in uris
+
+
+class TestRegistryConsistency:
+    """server.py registers resources using both the dict key and its fields,
+    so a typo that makes them disagree would only show up at runtime."""
+
+    @pytest.mark.parametrize("uri", list(RESOURCES))
+    def test_key_matches_embedded_uri(self, uri):
+        assert RESOURCES[uri]["uri"] == uri
+
+    @pytest.mark.parametrize("uri", list(RESOURCES))
+    def test_required_fields_present_and_non_empty(self, uri):
+        for field in ("uri", "name", "description", "mimeType", "content"):
+            assert RESOURCES[uri][field].strip() != "", f"{uri}: empty {field!r}"

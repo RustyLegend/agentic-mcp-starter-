@@ -70,6 +70,40 @@ RESOURCES: dict[str, dict[str, str]] = {
             "Resource → provides information  (e.g. workshop://introduction)\n"
         ),
     },
+    "workshop://getting-started": {
+        "uri": "workshop://getting-started",
+        "name": "Getting Started Guide",
+        "description": "Setup steps and the learning flow for workshop participants.",
+        "mimeType": "text/plain",
+        "content": (
+            "Getting Started\n"
+            "===============\n\n"
+            "Setup\n"
+            "-----\n"
+            "  1. Clone the repository and open a terminal in its root folder.\n"
+            "  2. Create a virtual environment with Python 3.12:\n"
+            "       Linux / macOS : python3.12 -m venv .venv\n"
+            "       Windows       : py -3.12 -m venv .venv\n"
+            "  3. Activate it:\n"
+            "       Linux / macOS : source .venv/bin/activate\n"
+            "       Windows       : .venv\\Scripts\\Activate.ps1\n"
+            "  4. Install the dependencies, then the project itself:\n"
+            "       pip install -r requirements.txt\n"
+            "       pip install -e .\n"
+            "  5. Check that everything works:\n"
+            "       pytest -q\n"
+            "       ruff check .\n\n"
+            "No API keys are needed. The workshop runs offline with a mock LLM.\n\n"
+            "Learning flow\n"
+            "-------------\n"
+            "  1. Read the README to learn what MCP is and how the pieces fit.\n"
+            "  2. Run the scripts in examples/ to watch discovery and invocation.\n"
+            "  3. Read the source in this order: server.py, client.py, agent.py.\n"
+            "  4. Run the tests to see how each part is verified.\n"
+            "  5. Pick an issue from docs/ISSUES.md, implement it, add tests,\n"
+            "     and open a pull request.\n"
+        ),
+    },
 }
 
 

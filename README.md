@@ -384,6 +384,7 @@ Expected output:
 [Resources]
   - workshop://introduction : Workshop Introduction
   - workshop://architecture : MCP Architecture Overview
+  - workshop://getting-started : Getting Started Guide
 
 [Tool call]  calculate('2 + 3')  →  5
 ```
