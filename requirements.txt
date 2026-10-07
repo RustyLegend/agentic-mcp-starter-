@@ -1,5 +1,5 @@
 # Runtime dependencies
-mcp>=1.0.0
+mcp>=1.2.0,<2  # v2 renamed FastMCP; server.py uses the v1 API
 python-dotenv>=1.0.0
 
 # Development / testing dependencies
